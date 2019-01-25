@@ -1,26 +1,28 @@
-###load libraries
+###loading libraries
 require(classInt)
 require(maps)
 require(nlme)
+require(phytools)
 require(picante)
 require(raster)
 require(RColorBrewer)
 require(segmented)
 require(vegan)
 
-###load community (genus-by-site) matix
+###loading objects
+#community (genus-by-site) matix
 comm <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
-###load phylogeny
+#phylogeny
 phy <- read.tree('phy.tre')
 ##matching objects
 tmp <- match.phylo.comm(phy, comm)
 comm <- tmp$comm
 phy <- tmp$phy
 
-###compute lineage diversity
+###computing lineage diversity
 LD <- ses.pd(comm, phy, null.model = 'taxa.labels', runs = 999)
 
-###load metadata (md) matrix comprising explanatory variables
+###loading metadata (md) matrix comprising explanatory variables
 #md and community matrix have the same row order 
 md <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
 md <- cbind(LD, md)
@@ -33,7 +35,7 @@ summary(lm(LD ~ poly(MAP, 2, raw = T), data = md)
 #piecewise
 summary(segmented(lm(LD ~ MAP, data = md), seg.Z = ~ MAP))
 
-###subset matrix following break-point in piecewise regression
+###subsetting metadata according to break-point in piecewise regression
 low.MAP <- md[which(md$MAP<1490),]
 hi.MAP <- md[which(md$MAP>=1490),]
 
@@ -58,13 +60,23 @@ AIC(low.ac)
 AIC(hi.null)
 AIC(hi.ac)
 
+###computing phylogenetic signal	
+##loading metadata matrix comprising precipitation niche of each genus (calculating mean MAP for sites at which it occurred)
+md2 <- read.table(file.choose(), header = F, row.names = 1, sep = ',')
+phylovector <- as.vector(prec$V2)#column with mean MAP
+names(phylovector) <- rownames(md2)
+
+##matching objects and computing phylosignal
+tmp <- match.phylo.data(phy, phylovector)
+phy <- tmp$phy
+phylovector <- tmp$data
+
+phylosig(phy, phylovector, method = 'lambda', test = T, nsim = 1000)
+
 ###Figure 1	
-prec <- read.csv('MAP_mean.csv', header = F, row.names = 1, sep = ',')
-phylovector <- as.vector(prec$V2)
-names(phylovector) <- rownames(prec)
 obj <- contMap(phy, phylovector, plot = F)
-plot(obj, type = 'fan', lwd = 1.5, legend = F, ftype = 'off')
-add.color.bar(leg = 80, x=65, y = 140, obj$cols, lims = obj$lims, invert = T, lwd = 3, digits = 2, fsize = 1, prompt = FALSE,
+plot(obj, type = 'fan', lwd = 1.5, ftype = 'off', legend = F, )
+add.color.bar(leg = 80, x = 65, y = 140, lims = obj$lims, obj$cols, invert = T, lwd = 3, digits = 2, fsize = 1, prompt = FALSE,
 	      title = "MAP", subtitle = "length=80")
 
 ###Figure 2
@@ -121,14 +133,14 @@ ordisurf(latlong, md$MAP, col = "black", level = c(1200, 1800), labcex = 0.8, ma
 ordisurf(latlong, md$MAP, col = "gray60", level = c(2400, 2800), labcex = 0.8, main = "", add = T)
 main = title('b', cex.main = 1.5, adj = 0)
 	
-###Figure 3 (in prep)
-#load shapefiles from wd and metadata (md2) comprising latlongs for 80 tree communities with highest LD (top 5%) 
-md2 <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
+###Figure 3
+#load shapefiles from wd and metadata (md3) comprising latlongs for 80 tree communities with highest LD (top 5%) 
+md3 <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
 
 wdpa <- shapefile('wdpa')#from World Database of Protected Areas
 sa <- shapefile('south_america')
 
-e <- c(min(md2$Long10), max(md2$Long10), min(md2$Lat10), max(md2$Lat10))#map extension
+e <- c(min(md3$Long10), max(md3$Long10), min(md3$Lat10), max(md3$Lat10))#map extension
 wdpa <- crop(wdpa, e)
 
 map(xlim = c(-77.8533, -34.8608), ylim = c(-24.9044, 8.4711), col = 'white')
@@ -137,8 +149,7 @@ map.axes()
 plot(wdpa, col = 'gray90', border = 'gray90', add = T)
 plot(south.amer, add = T)
 points(md2$Long10, md2$Lat10, pch = 16, col = rgb(t(col2rgb("red"))/255, alpha = 0.5)), cex = 0.5)
-legend('topright', c('high LD unprotected', 'low LD unprotected', 'protected'), pch = 16,
-	col = c(rgb(t(col2rgb("red"))/255, alpha = 0.5),
-	rgb(t(col2rgb("blue"))/255, alpha = 0.5), 'black'), bty = 'n')
+legend('topright', c('Protected Areas', 'High LD unprotected'), pch = c(15, 16),
+       col = c('gray90', rgb(t(col2rgb("red"))/255, alpha = 0.5)), bty = 'n')
 
 ###Suplementary Figures (in prep)
