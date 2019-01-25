@@ -22,20 +22,20 @@ LD <- ses.pd(comm, phy, null.model = 'taxa.labels', runs = 999)
 
 ###load metadata (md) matrix comprising explanatory variables
 #md and community matrix have the same row order 
-md <- read.csv(file.choose(), header = T, row.names = 1, sep = ',', dec = '.')
+md <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
 md <- cbind(LD, md)
 
 ###regressions
 #linear
-summary(lm(md$LD ~ md$MAP))#LD = Lineage Diversity; MAP = Mean Annual Precipitation
+summary(lm(LD ~ MAP, data = md))#LD = Lineage Diversity; MAP = Mean Annual Precipitation
 #quadratic
-summary(lm(md$LD ~ poly(md$MAP, 2, raw = T))
+summary(lm(LD ~ poly(MAP, 2, raw = T), data = md)
 #piecewise
-summary(segmented(lm(md$LD ~ md$MAP), seg.Z = ~ MAP, data = md))
+summary(segmented(lm(LD ~ MAP, data = md), seg.Z = ~ MAP))
 
 ###subset matrix following break-point in piecewise regression
-low.MAP <- md[which(md$MAP<=1490),]
-hi.MAP <- md[which(md$MAP>1490),]
+low.MAP <- md[which(md$MAP<1490),]
+hi.MAP <- md[which(md$MAP>=1490),]
 
 ###Generalised Least Squares (controlling for spatial AC)
 ##low.MAP
@@ -58,74 +58,87 @@ AIC(low.ac)
 AIC(hi.null)
 AIC(hi.ac)
 
+###Figure 1	
+prec <- read.csv('MAP_mean.csv', header = F, row.names = 1, sep = ',')
+phylovector <- as.vector(prec$V2)
+names(phylovector) <- rownames(prec)
+obj <- contMap(phy, phylovector, plot = F)
+plot(obj, type = 'fan', lwd = 1.5, legend = F, ftype = 'off')
+add.color.bar(leg = 80, x=65, y = 140, obj$cols, lims = obj$lims, invert = T, lwd = 3, digits = 2, fsize = 1, prompt = FALSE,
+	      title = "MAP", subtitle = "length=80")
+
 ###Figure 2
 latlong <- cbind(md$Long10, md$Lat10)
 par(mfrow=c(1,2))
 
+##x~y plot
 plot(md$LD ~ md$MAP, col = "white", xlab = "Mean Annual Precipitation (mm)", ylab = "Lineage Diversity (sesPD)",, 
      	cex.axis = 1.5, cex.lab = 1.5)
 main = title('a', cex.main = 1.5, adj = 0)
 
-#setting color ramp
+##setting color ramp for points
 var <- md$LD
 nclas <- brewer.pal(4, "Spectral")
 nclas <- nclas[4:1]
 class <- classIntervals(var)
 colcode <- findColours(class, nclas)	
-
 points(md$MAP, md$LD, pch = c(17, 16)[as.numeric(md$MAP_beta)], col = colcode)
-#extracting coefficients of correlation for legend
+
+##extracting coefficients of correlation for legend
 low.r = bquote(r^2 == .(format(cor(low.MAP$LD,predict(low.ac))^2, digits = 2)))
 hi.r = bquote(r^2 == .(format(cor(hi.MAP$LD,predict(hi.ac))^2, digits = 2)))
 legend("topleft", legend = low.r, bty = "n", cex = 1.5)
 legend("topright", legend = hi.r, bty = "n", cex = 1.5)
 
-#extracting ranges for curves
+##extracting slope and intercept for curves
 x.low <- c(min(md$MAP), 1490)
-y.low <- x.low* 0.0034780-5.3610
+y.low <- x.low* lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[2]-lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[1]
 x.hi <- c(1490,max(md$MAP))
-y.hi <- x.hi*(-0.0006022)+ 0.7165
-low.ci <- lm(sesPD ~ PrecAnn, data = low.MAP)
-myPredict <- predict(low.ci, interval="confidence", level = 0.99)
-ix <- sort(low.MAP$PrecAnn,index.return=T)$ix
-polygon(c(rev(low.MAP$PrecAnn[ix]), low.MAP$PrecAnn[ix]),
-	c(rev(myPredict[ ix,3]),
-	myPredict[ ix,2]), border = NA, col = gray(0.2,alpha = 0.5))
-lines(x_low, y_low, lwd = 5, col = gray(0.2,alpha = 0.9))
-hi.ci <- lm(sesPD ~ PrecAnn, data = hi.MAP)
-myPredict <- predict(hi.ci, interval="confidence", level = 0.99)
-ix <- sort(hi.MAP$PrecAnn,index.return=T)$ix
-polygon(c(rev(hi.MAP$PrecAnn[ix]), hi.MAP$PrecAnn[ix]),
-	c(rev(myPredict[ ix,3]),
-	myPredict[ ix,2]), border = NA, col = gray(0.2,alpha = 0.5))
-lines(x_hi, y_hi, lwd = 5, col = gray(0.2,alpha = 0.9))
+y.hi <- x.hi*(lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[2])+ lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[1]
+
+##extracting ranges for 99% confidence intervals and plotting curves
+#low.MAP
+low.ci <- lm(LD ~ MAP, data = low.MAP)
+low.predict <- predict(low.ci, interval = "confidence", level = 0.99)
+ix <- sort(low.MAP$MAP, index.return = T)$ix
+polygon(c(rev(low.MAP$MAP[ix]), low.MAP$MAP[ix]), c(rev(low.predict[ix, 3]), low.predict[ix, 2]),
+	border = NA, col = gray(0.2, alpha = 0.5))
+#hi.MAP
+hi.ci <- lm(LD ~ MAP, data = hi.MAP)
+hi.predict <- predict(hi.ci, interval = "confidence", level = 0.99)
+ix <- sort(hi.MAP$MAP, index.return = T)$ix
+polygon(c(rev(hi.MAP$MAP[ix]), hi.MAP$MAP[ix]), c(rev(hi.predict[ix, 3]), hi.predict[ix, 2]),
+	border = NA, col = gray(0.2, alpha = 0.5))
+lines(x.hi, y.hi, lwd = 5, col = gray(0.2, alpha = 0.9))
+#break-point
 abline(v = 1490, lty = 2, lwd = 5, col = gray(0.2,alpha = 0.9))
 
-dev.off()
+#map
+map(xlim = c(-77.8533,-34.8608), ylim = c(-24.9044,8.4711), lty = 'dashed')#min and max latlongs
+map.axes(cex.axis = 1.5)
+points(md$Long10, md$Lat10, pch = c(17, 16)[as.numeric(md2$MAP_beta)], col = colcode, cex = 0.5)
+ordisurf(latlong, md$MAP, col = "black", level = c(1200, 1800), labcex = 0.8, main = "", add = T)
+ordisurf(latlong, md$MAP, col = "gray60", level = c(2400, 2800), labcex = 0.8, main = "", add = T)
+main = title('b', cex.main = 1.5, adj = 0)
+	
+###Figure 3 (in prep)
+#load shapefiles from wd and metadata (md2) comprising latlongs for 80 tree communities with highest LD (top 5%) 
+md2 <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
 
-###Figure 3
+wdpa <- shapefile('wdpa')#from World Database of Protected Areas
+sa <- shapefile('south_america')
 
-PAs <- read.csv('PAs_final.csv', header = T, row.names = 1, sep = ',')
-wdpa <- shapefile('wdpa_crop')
-south.amer <- shapefile('amer_sul')
-brasil <- shapefile('Brazil')
-
-#e <- c(-77.8533, -34.8608, -24.9044, 8.4711)
-#wdpa <- crop(wdpa, e)
+e <- c(min(md2$Long10), max(md2$Long10), min(md2$Lat10), max(md2$Lat10))#map extension
+wdpa <- crop(wdpa, e)
 
 map(xlim = c(-77.8533, -34.8608), ylim = c(-24.9044, 8.4711), col = 'white')
 map.axes()
 
 plot(wdpa, col = 'gray90', border = 'gray90', add = T)
 plot(south.amer, add = T)
-points(PAs$Long10, PAs$Lat10, pch = 16,
-	col = c('black',
-	rgb(t(col2rgb("blue"))/255, alpha = 0.5),
-	rgb(t(col2rgb("red"))/255, alpha = 0.5))[as.numeric(PAs$PA)], cex = 0.5)
-legend('topright', c('high LD unprotected', 'low LD unprotected',
-	'protected'), pch = 16,
+points(md2$Long10, md2$Lat10, pch = 16, col = rgb(t(col2rgb("red"))/255, alpha = 0.5)), cex = 0.5)
+legend('topright', c('high LD unprotected', 'low LD unprotected', 'protected'), pch = 16,
 	col = c(rgb(t(col2rgb("red"))/255, alpha = 0.5),
 	rgb(t(col2rgb("blue"))/255, alpha = 0.5), 'black'), bty = 'n')
 
-dev.off()
-
+###Suplementary Figures (in prep)
