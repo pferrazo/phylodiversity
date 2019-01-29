@@ -153,3 +153,18 @@ legend('topright', c('Protected Areas', 'High LD unprotected'), pch = c(15, 16),
        col = c('gray90', rgb(t(col2rgb("red"))/255, alpha = 0.5)), bty = 'n')
 
 ###Suplementary Figures (in prep)
+
+###SUNPLIN (in prep)
+dyn.load("sunplin.spn")
+source("sunplin-functions.r")
+trees <- list.files(pattern="*.tre")
+trees.sunplin <- lapply(1:length(trees),
+	function(x) sunplin.expd(trees[x], "sunplin_infile.txt", 100, 1))
+trees.sunplin2 <- unlist(trees.sunplin)
+foo <- function(trees.sunplin2) lapply(1:length(trees),
+		function(x) sunplin.n.tree(trees.sunplin2, x, "tree"))
+trees100 <- lapply(trees.sunplin2, foo)
+for(i in 1:100){
+	class(trees100[[i]]) <- 'multiPhylo'
+}
+10k.trees.sunplin <- do.call(c, lapply(1:100, function(x) trees100[[x]]))
