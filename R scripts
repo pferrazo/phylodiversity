@@ -1,5 +1,6 @@
 ###loading libraries
 require(classInt)
+require(geiger)
 require(maps)
 require(nlme)
 require(phytools)
@@ -152,19 +153,160 @@ points(md2$Long10, md2$Lat10, pch = 16, col = rgb(t(col2rgb("red"))/255, alpha =
 legend('topright', c('Protected Areas', 'High LD unprotected'), pch = c(15, 16),
        col = c('gray90', rgb(t(col2rgb("red"))/255, alpha = 0.5)), bty = 'n')
 
-###Suplementary Figures (in prep)
 
-###SUNPLIN (in prep)
+###Suplementary Analyses (in prep)
+
+##SUNPLIN; i.e., inserting unsequenced taxa into the phylogeny using function in geiger to get taxonomy for each taxon from ncbi
+#loading metadata (md4) comprising all genera in the communities
+md4 <- read.csv(file.choose(), header = T, sep = ",")
+taxonomy.genus <- as.data.frame(gbresolve(md4$Genus))
+
+##matching that up with the original matrix
+taxonomy <- matrix(NA, nrow(md4), ncol(taxonomy.genus))
+colnames(taxonomy) <- colnames(taxonomy.genus)
+for (i in 1:nrow(taxonomy)){
+	if (genus$Genus[i]%in%taxonomy.genus$genus){
+		taxonomy[i,] <- as.matrix(taxonomy.genus[match(md4$Genus[i], taxonomy.genus$genus),])
+	}
+}
+taxonomy[which(md4$Genus%in%taxonomy.genus$genus),] <- as.matrix(taxonomy.genus[na.omit(match(md4$Genus, taxonomy.genus$genus)), -1])
+
+genus.taxonomy <- cbind(md4, taxonomy)
+write.csv(genus.taxonomy,"genus_taxonomy.csv")
+
+#It seems most efficient to fill out the rest of this table out of R (using plantlist.org, and filling in empty cells with NA)
+
+##loading taxonomy matrix
+genus.taxonomy <- read.csv("genus_taxonomy.csv", stringsAsFactors = F)
+
+##creating temporary objects and creating vectors for each taxonomic rank
+#subtribe
+t1 <- summary(as.factor(genus.taxonomy[, 2]), maxsum = 10000)
+t2 <- names(t1)[which(t1>1)]
+t3 <- t2[1:(length(t2)-1)]
+subtribe <- t3
+t4 <- genus.taxonomy[which(genus.taxonomy[, 2]%in%t3), ]
+t5 <- lapply(1:length(t3),
+	function(x) t4[which(t4[, 2]%in%t3[x]), ])
+t6 <- lapply(1:length(t5), function(x) t5[[x]]$genus)
+subtribe.genus <- t6
+
+#tribe
+t1 <- summary(as.factor(genus.taxonomy[, 3]), maxsum = 10000)
+t2 <- names(t1)[which(t1>1)]
+t3 <- t2[1:(length(t2)-1)]
+tribe <- t3
+t4 <- genus.taxonomy[which(genus.taxonomy[, 3]%in%t3), ]
+t5 <- lapply(1:length(t3),
+	function(x) t4[which(t4[, 3]%in%t3[x]), ])
+t6 <- lapply(1:length(t5), function(x) t5[[x]]$genus)
+tribe.genus <- t6
+
+#subfamily
+t1 <- summary(as.factor(genus.taxonomy[, 4]), maxsum = 10000)
+t2 <- names(t1)[which(t1>1)]
+t3 <- t2[1:(length(t2)-1)]
+subfamily <- t3
+t4 <- genus.taxonomy[which(genus.taxonomy[, 4]%in%t3), ]
+t5 <- lapply(1:length(t3),
+	function(x) t4[which(t4[, 4]%in%t3[x]), ])
+t6 <- lapply(1:length(t5), function(x) t5[[x]]$genus)
+subfamily.genus <- t6
+
+#family
+t1 <- summary(as.factor(genus.taxonomy[, 5]), maxsum = 10000)
+t2 <- names(t1)[which(t1>1)]
+family <- t2
+t4 <- genus.taxonomy[which(genus.taxonomy[, 5]%in%t2), ]
+t5 <- lapply(1:length(t2),
+	function(x) t4[which(t4[, 5]%in%t2[x]), ])
+t6 <- lapply(1:length(t5), function(x) t5[[x]]$genus)
+family.genus <- t6
+
+#order
+t1 <- summary(as.factor(genus.taxonomy[, 6]), maxsum = 10000)
+t2 <- names(t1)[which(t1>1)]
+order <- t2
+t4 <- genus.taxonomy[which(genus.taxonomy[, 6]%in%t2), ]
+t5 <- lapply(1:length(t2),
+	function(x) t4[which(t4[, 6]%in%t2[x]), ])
+t6 <- lapply(1:length(t5), function(x) t5[[x]]$genus)
+order.genus <- t6
+
+#subclass
+t1 <- summary(as.factor(genus.taxonomy[, 7]), maxsum = 10000)
+t2 <- names(t1)[which(t1>1)]
+t3 <- t2[1:(length(t2)-1)]
+subclass <- t3
+t4 <- genus.taxonomy[which(genus.taxonomy[, 7]%in%t3), ]
+t5 <- lapply(1:length(t3),
+	function(x) t4[which(t4[, 7]%in%t3[x]), ])
+t6 <- lapply(1:length(t5), function(x) t5[[x]]$genus)
+subclass.genus <- t6
+
+clade.list <- c(subtribe, tribe, subfamily, family, order, subclass)
+clade.vector <- as.vector(unlist(clade.list))
+
+taxa.list <- c(subtribe.genus, tribe.genus, subfamily.genus, family.genus,
+	order.genus, subclass.genus)
+
+##loading multiple phylogenies (i.e., 100 trees from posterior distribution)
+trees <- read.tree('100phylogenies.tre')
+
+##matching phylogenies and community (genus-by-site) matrix
+trees.match <- lapply(1:length(trees),
+	function(x) match.phylo.comm(trees[[x]], comm))
+trees <- lapply(1:length(trees), function(x) trees.match[[x]]$phy)
+
+##finding most recent common ancestor for each taxonomic rank
+foo <- function(tree) lapply(1:length(taxa.list),
+		function(x) findMRCA(tree, taxa.list[[x]], type = 'node'))
+
+taxaMRCA <- lapply(trees,foo)
+
+matrixMRCA <- matrix(unlist(taxaMRCA), ncol = length(taxa.list),  byrow = T)
+
+taxa.vector <- lapply(1:length(trees), function(x) matrixMRCA[x, ])
+
+node.labels <- lapply(1:length(trees),
+	function(x) vector("character",Ntip(tree)-1))
+
+##assigning node labels
+for(i in 1:length(trees)){
+	node_labels[[i]][taxa.vector[[i]]-Ntip(tree)] <- clade.vector
+}
+
+for(i in 1:100){
+	trees[[i]]$node.labels <- node.labels[[i]]
+}
+
+##interfacing with SUNPLIN
+lapply(1:length(trees_nodelabels),
+	function(x) write.tree(trees_nodelabels[[x]],
+	file = paste0(c('trees_nodelabels'), x, ".tre")))
+
+trees.list <- list.files(pattern="*.tre")
+
+
 dyn.load("sunplin.spn")
 source("sunplin-functions.r")
-trees <- list.files(pattern="*.tre")
+
 trees.sunplin <- lapply(1:length(trees),
-	function(x) sunplin.expd(trees[x], "sunplin_infile.txt", 100, 1))
+	function(x) sunplin.expd(trees.list[x], "sunplin_infile.txt", 100, 1))
+
 trees.sunplin2 <- unlist(trees.sunplin)
-foo <- function(trees.sunplin2) lapply(1:length(trees),
+
+foo2 <- function(trees.sunplin2) lapply(1:length(trees),
 		function(x) sunplin.n.tree(trees.sunplin2, x, "tree"))
-trees100 <- lapply(trees.sunplin2, foo)
+
+trees100 <- lapply(trees.sunplin2, foo2)
+
+trees100.test <- trees100
+
 for(i in 1:100){
-	class(trees100[[i]]) <- 'multiPhylo'
+	class(trees100.test[[i]]) <- 'multiPhylo'
 }
-10k.trees.sunplin <- do.call(c, lapply(1:100, function(x) trees100[[x]]))
+
+test <- trees100.test
+
+10k.trees.sunplin <- do.call(c, lapply(1:100, function(x) test[[x]]))
