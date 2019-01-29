@@ -153,8 +153,9 @@ points(md2$Long10, md2$Lat10, pch = 16, col = rgb(t(col2rgb("red"))/255, alpha =
 legend('topright', c('Protected Areas', 'High LD unprotected'), pch = c(15, 16),
        col = c('gray90', rgb(t(col2rgb("red"))/255, alpha = 0.5)), bty = 'n')
 
-
-###Suplementary Analyses (in prep)
+######################
+#Suplementary Analyses
+######################
 
 ##SUNPLIN; i.e., inserting unsequenced taxa into the phylogeny using function in geiger to get taxonomy for each taxon from ncbi
 #loading metadata (md4) comprising all genera in the communities
@@ -276,37 +277,41 @@ for(i in 1:length(trees)){
 	node_labels[[i]][taxa.vector[[i]]-Ntip(tree)] <- clade.vector
 }
 
-for(i in 1:100){
+for(i in 1:length(trees)){
 	trees[[i]]$node.labels <- node.labels[[i]]
 }
 
-##interfacing with SUNPLIN
-lapply(1:length(trees_nodelabels),
-	function(x) write.tree(trees_nodelabels[[x]],
-	file = paste0(c('trees_nodelabels'), x, ".tre")))
+##writing phylogenies with node labels
+lapply(1:length(trees),
+	function(x) write.tree(trees[[x]],
+	file = paste0(c('tree_nodelabels'), x, ".tre")))
 
-trees.list <- list.files(pattern="*.tre")
+###interfacing with SUNPLIN; see https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-324
+##list 100 phylogenies with node labels
+trees.list <- list.files(pattern="*_nodelabels.tre")
 
-
+#loading SUNPLIN and its functions as a shared R object
 dyn.load("sunplin.spn")
 source("sunplin-functions.r")
 
+##inserting missing taxa
+#'sunplin_infile.txt' is a two-column table comprising taxa to be inserted and their most derived consensus clade (MDCC)
+#for details see https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-324
 trees.sunplin <- lapply(1:length(trees),
 	function(x) sunplin.expd(trees.list[x], "sunplin_infile.txt", 100, 1))
+#This generates 100 trees for each input phylogeny with taxa inserted at random positions within their MDCC
 
-trees.sunplin2 <- unlist(trees.sunplin)
+##unlist and creat multiPhylo comprising 10k SUNPLIN trees
+trees.sunplin <- unlist(trees.sunplin)
 
-foo2 <- function(trees.sunplin2) lapply(1:length(trees),
-		function(x) sunplin.n.tree(trees.sunplin2, x, "tree"))
+foo2 <- function(trees.sunplin) lapply(1:length(trees),
+		function(x) sunplin.n.tree(trees.sunplin, x, ".tre"))
+trees100 <- lapply(trees.sunplin, foo2)
 
-trees100 <- lapply(trees.sunplin2, foo2)
-
-trees100.test <- trees100
-
-for(i in 1:100){
-	class(trees100.test[[i]]) <- 'multiPhylo'
+for(i in 1:length(trees100)){
+	class(trees100[[i]]) <- 'multiPhylo'
 }
 
-test <- trees100.test
+10k.trees.sunplin <- do.call(c, lapply(1:length(trees100), function(x) trees100[[x]]))
 
-10k.trees.sunplin <- do.call(c, lapply(1:100, function(x) test[[x]]))
+###Compute Lineage Diversity with multiple phylogenies (in prep)
