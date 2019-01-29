@@ -62,7 +62,7 @@ AIC(hi.null)
 AIC(hi.ac)
 
 ###computing phylogenetic signal	
-##loading metadata matrix comprising precipitation niche of each genus (calculating mean MAP for sites at which it occurred)
+##loading metadata matrix comprising precipitation niche of each genus (by calculating mean MAP for sites at which it occurred)
 md2 <- read.table(file.choose(), header = F, row.names = 1, sep = ',')
 phylovector <- as.vector(prec$V2)#column with mean MAP
 names(phylovector) <- rownames(md2)
