@@ -62,17 +62,20 @@ AIC(hi.null)
 AIC(hi.ac)
 
 ###computing phylogenetic signal	
-##loading metadata matrix comprising precipitation niche of each genus (by calculating mean MAP for sites at which it occurred)
-md2 <- read.table(file.choose(), header = F, row.names = 1, sep = ',')
-phylovector <- as.vector(prec$V2)#column with mean MAP
-names(phylovector) <- rownames(md2)
+##creating temporary community matrix with absences = NA, and multiplying presences in a given site by its MAP value
+tmp <- comm
+tmp[tmp == 0] <- NA
+tmp <- tmp *md$MAP
+
+##creating object with precipitation niche of each genus (by calculating mean MAP for sites at which it occurred)
+prec <- apply(tmp, 2, mean, na.rm = T)
 
 ##matching objects and computing phylosignal
-tmp <- match.phylo.data(phy, phylovector)
+tmp <- match.phylo.data(phy, prec)
 phy <- tmp$phy
-phylovector <- tmp$data
+prec <- tmp$data
 
-phylosig(phy, phylovector, method = 'lambda', test = T, nsim = 1000)
+phylosig(phy, prec, method = 'lambda', test = T, nsim = 1000) #prec = precipitation niche of each genus
 
 ###Figure 1	
 obj <- contMap(phy, phylovector, plot = F)
@@ -135,13 +138,14 @@ ordisurf(latlong, md$MAP, col = "gray60", level = c(2400, 2800), labcex = 0.8, m
 main = title('b', cex.main = 1.5, adj = 0)
 	
 ###Figure 3
-#load shapefiles from wd and metadata (md3) comprising latlongs for 80 tree communities with highest LD (top 5%) 
-md3 <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
+#load shapefiles from wd and create metadata matrix (md2) comprising latlongs for 80 tree communities with highest LD (top 5%) 
+md2 <- md[order(md$LD, decreasing = T), ]
+md2 <- md2[1:80, ]
 
 wdpa <- shapefile('wdpa')#from World Database of Protected Areas
 sa <- shapefile('south_america')
 
-e <- c(min(md3$Long10), max(md3$Long10), min(md3$Lat10), max(md3$Lat10))#map extension
+e <- c(min(md2$Long10), max(md2$Long10), min(md2$Lat10), max(md2$Lat10))#map extension
 wdpa <- crop(wdpa, e)
 
 map(xlim = c(-77.8533, -34.8608), ylim = c(-24.9044, 8.4711), col = 'white')
@@ -158,29 +162,28 @@ legend('topright', c('Protected Areas', 'High LD unprotected'), pch = c(15, 16),
 ######################
 
 ##SUNPLIN; i.e., inserting unsequenced taxa into the phylogeny using function in geiger to get taxonomy for each taxon from ncbi
-#loading metadata (md4) comprising all genera in the communities
+#loading metadata (md3) comprising all genera in the communities
 md4 <- read.csv(file.choose(), header = T, sep = ",")
-taxonomy.genus <- as.data.frame(gbresolve(md4$Genus))
+taxonomy.genus <- as.data.frame(gbresolve(md3$Genus))
 
 ##matching that up with the original matrix
-taxonomy <- matrix(NA, nrow(md4), ncol(taxonomy.genus))
+taxonomy <- matrix(NA, nrow(md3), ncol(taxonomy.genus))
 colnames(taxonomy) <- colnames(taxonomy.genus)
 for (i in 1:nrow(taxonomy)){
 	if (genus$Genus[i]%in%taxonomy.genus$genus){
-		taxonomy[i,] <- as.matrix(taxonomy.genus[match(md4$Genus[i], taxonomy.genus$genus),])
+		taxonomy[i,] <- as.matrix(taxonomy.genus[match(md3$Genus[i], taxonomy.genus$genus),])
 	}
 }
-taxonomy[which(md4$Genus%in%taxonomy.genus$genus),] <- as.matrix(taxonomy.genus[na.omit(match(md4$Genus, taxonomy.genus$genus)), -1])
+taxonomy[which(md3$Genus%in%taxonomy.genus$genus),] <- as.matrix(taxonomy.genus[na.omit(match(md3$Genus, taxonomy.genus$genus)), -1])
 
-genus.taxonomy <- cbind(md4, taxonomy)
+genus.taxonomy <- cbind(md3, taxonomy)
 write.csv(genus.taxonomy,"genus_taxonomy.csv")
-
 #It seems most efficient to fill out the rest of this table out of R (using plantlist.org, and filling in empty cells with NA)
 
 ##loading taxonomy matrix
 genus.taxonomy <- read.csv("genus_taxonomy.csv", stringsAsFactors = F)
 
-##creating temporary objects and creating vectors for each taxonomic rank
+##creating vectors for each taxonomic rank (t1, t2, etc; are temporary objects)
 #subtribe
 t1 <- summary(as.factor(genus.taxonomy[, 2]), maxsum = 10000)
 t2 <- names(t1)[which(t1>1)]
@@ -315,3 +318,4 @@ for(i in 1:length(trees100)){
 10k.trees.sunplin <- do.call(c, lapply(1:length(trees100), function(x) trees100[[x]]))
 
 ###Compute Lineage Diversity with multiple phylogenies (in prep)
+
