@@ -1,4 +1,5 @@
 ###loading libraries
+require(ape)
 require(classInt)
 require(geiger)
 require(maps)
@@ -8,6 +9,7 @@ require(picante)
 require(raster)
 require(RColorBrewer)
 require(segmented)
+require(TreeSim)
 require(vegan)
 
 ###loading objects
@@ -15,7 +17,9 @@ require(vegan)
 comm <- read.csv(file.choose(), header = T, row.names = 1, sep = ',')
 #phylogeny
 phy <- read.tree('phy.tre')
-##matching objects
+
+##matching objects (i.e., checking whether species in matrix are tips in phylogeny; and vice-versa)
+#tmp = temporary object (here and elsewhere)
 tmp <- match.phylo.comm(phy, comm)
 comm <- tmp$comm
 phy <- tmp$phy
@@ -62,7 +66,7 @@ AIC(hi.null)
 AIC(hi.ac)
 
 ###computing phylogenetic signal	
-##creating temporary community matrix with absences = NA, and multiplying presences in a given site by its MAP value
+##creating temporary community matrix (tmp) with absences = NA, and multiplying presences in a given site by its MAP value
 tmp <- comm
 tmp[tmp == 0] <- NA
 tmp <- tmp *md$MAP
@@ -110,7 +114,7 @@ legend("topright", legend = hi.r, bty = "n", cex = 1.5)
 x.low <- c(min(md$MAP), 1490)
 y.low <- x.low* lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[2]-lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[1]
 x.hi <- c(1490,max(md$MAP))
-y.hi <- x.hi*(lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[2])+ lm(low.MAP$LD ~ low.MAP$MAP)$coefficients[1]
+y.hi <- x.hi*(lm(hi.MAP$LD ~ hi.MAP$MAP)$coefficients[2])+ lm(hi.MAP$LD ~ hi.MAP$MAP)$coefficients[1]
 
 ##extracting ranges for 99% confidence intervals and plotting curves
 #low.MAP
@@ -157,13 +161,13 @@ points(md2$Long10, md2$Lat10, pch = 16, col = rgb(t(col2rgb("red"))/255, alpha =
 legend('topright', c('Protected Areas', 'High LD unprotected'), pch = c(15, 16),
        col = c('gray90', rgb(t(col2rgb("red"))/255, alpha = 0.5)), bty = 'n')
 
-######################
-#Suplementary Analyses
-######################
+################################
+#Suplementary Analyses (in prep)
+################################
 
 ##SUNPLIN; i.e., inserting unsequenced taxa into the phylogeny using function in geiger to get taxonomy for each taxon from ncbi
 #loading metadata (md3) comprising all genera in the communities
-md4 <- read.csv(file.choose(), header = T, sep = ",")
+md3 <- read.csv(file.choose(), header = T, sep = ",")
 taxonomy.genus <- as.data.frame(gbresolve(md3$Genus))
 
 ##matching that up with the original matrix
@@ -183,7 +187,7 @@ write.csv(genus.taxonomy,"genus_taxonomy.csv")
 ##loading taxonomy matrix
 genus.taxonomy <- read.csv("genus_taxonomy.csv", stringsAsFactors = F)
 
-##creating vectors for each taxonomic rank (t1, t2, etc; are temporary objects)
+##creating vectors for each taxonomic rank (t1:t6 are temporary objects)
 #subtribe
 t1 <- summary(as.factor(genus.taxonomy[, 2]), maxsum = 10000)
 t2 <- names(t1)[which(t1>1)]
@@ -304,7 +308,7 @@ trees.sunplin <- lapply(1:length(trees),
 	function(x) sunplin.expd(trees.list[x], "sunplin_infile.txt", 100, 1))
 #This generates 100 trees for each input phylogeny with taxa inserted at random positions within their MDCC
 
-##unlist and creat multiPhylo comprising 10k SUNPLIN trees
+##unlist and create multiPhylo comprising 10k SUNPLIN trees
 trees.sunplin <- unlist(trees.sunplin)
 
 foo2 <- function(trees.sunplin) lapply(1:length(trees),
@@ -317,5 +321,189 @@ for(i in 1:length(trees100)){
 
 10k.trees.sunplin <- do.call(c, lapply(1:length(trees100), function(x) trees100[[x]]))
 
-###Compute Lineage Diversity with multiple phylogenies (in prep)
+###Computing Lineage Diversity with multiple phylogenies
+##matching phylogenies and community matrix
+tmp <- lapply(1:length(10k.trees.sunplin),
+	function(x) match.phylo.comm(10k.trees.sunplin[[x]], comm))
+
+comm.list <- lapply(1:length(10k.trees.sunplin), function(x) tmp[[x]]$comm)
+
+
+LD.sunplin <- lapply(1:length(10k.trees.sunplin),
+	function(x) ses.pd(comm.list[[x]], 10k.trees.sunplin[[x]], null.model = 'taxa.label', runs = 999))
+#most efficient to run multiple ses.pd analyses in parallel; i.e. using High-Performance Computing clusters
+
+LD.sunplin <- do.call(cbind, LD.sunplin)
+
+###Supplementary Figure 1
+##creating temporary files for linear, quadratic and piecewise regressions. tmp4 = list of break-points in piecewise regression
+tmp <- lapply(1:ncol(LD.sunplin), function(x)
+	summary(lm(LD.sunplin[, x] ~ md$MAP))$adj.r.squared)
+
+tmp2 <- lapply(1:length(LD.sunplin), function(x)
+	summary(lm(LD.sunplin[, x] ~ poly(md$MAP, 2, raw = T)))$adj.r.squared)
+
+tmp3 <- lapply(1:length(LD.sunplin), function(x)
+	summary(segmented(lm(LD.sunplin[, x] ~ md$MAP), seg.Z = ~ md$MAP))$adj.r.squared)
+
+tmp4 <- lapply(1:length(LD.sunplin), function(x)
+	summary(segmented(lm(LD.sunplin[, x] ~ md$MAP), seg.Z = ~ md$MAP))$psi[2])
+
+##calculating mean and 95% CI for break-point (tmp4)
+error <- qnorm(0.975)*sd(unlist(tmp4))/sqrt(length(unlist(tmp4)))
+mean(unlist(tmp4))
+mean(unlist(tmp4))-error
+mean(unlist(tmp4))+error
+
+##plot
+par(mfrow = c(1,3))
+hist(unlist(tmp), main = 'Linear Regression', xlab = 'Adjusted r-squared',
+	col = 'gray', cex.axis = 2, cex.lab = 2, cex.main = 2)
+abline(v = mean(unlist(tmp)), lty = 'dashed', lwd = 3)
+
+hist(unlist(tmp2), main = 'Polynomial Quadratic Model',
+	xlab = 'Adjusted r-squared', col = 'gray', cex.axis = 2,
+	cex.lab = 2, cex.main = 2, xlim = c(0.38, 0.52))
+abline(v = mean(unlist(tmp2)), lty = 'dashed', lwd = 3)
+
+hist(unlist(tmp3), main = 'Piecewise Regression',
+	xlab = 'Adjusted r-squared', col = 'gray', cex.axis = 2, cex.lab = 2,
+	cex.main = 2)
+abline(v = mean(unlist(tmp3)), lty = 'dashed', lwd = 3)
+
+###generating species-level phylogeny
+#this works for coalescent and birth-death, to simply create polytomies, see function expandTaxonTree in paleotree package
+
+##function (adapted from Kyle Dexter, University of Edinburgh; kgdexter@gmail.com)
+add_species_fcn <- function(phy, data, model = "bd", birth = 1, death = 0.9, bind.depth = NA){
+	#first narrowing the tree and the data down to genera in common between the two
+	tmp <- as.character(unique(data$Genus))
+	tmp.match <- na.omit(match(phy$tip.label, tmp))
+	tmp.genera <- tmp[tmp.match]
+	tmp.tips2drop <- phy$tip.label[!phy$tip.label %in% tmp.genera]
+	if (length(tmp.tips2drop)<1) phy.trim <- phy else phy.trim <- drop.tip(phy.trim, tmp.tips2drop)
+	
+	#then looping across all genera 
+	for (i in 1:(length(tmp.genera))){
+		#this first step is simply getting the species for the genus in a vector
+		genus <- tmp.genera[i]
+		tmp.species <- data[data$Genus==genus, 'Species']
+		tmp.species <- as.character(tmp.species)
+		tmp.species <- paste(genus, "_", tmp.species, sep = "")
+
+		if (length(tmp.species)>=2) {
+			if (model=="coalescent"){
+				genus.tree <- rcoal(length(tmp.species), tmp.species)
+				} else
+				if (model=="bd"){
+					beta.tree <- sim.bd.taxa(length(tmp.species), 1, birth, death, complete = FALSE)
+					genus.tree <- beta.tree[[1]]
+					tmp2 <- genus.tree[[1]]
+					genus.tree$tip.label <- tmp.species
+					}	
+			bind.node <- match(genus, phy.trim$tip.label)
+			if (is.na(bind.depth)){
+				bind.depth2 <- (phy.trim$edge.length[which(phy.trim$edge[,2]==bind.node)])
+				genus.tree$root.edge <- (tmp2[[2]] - max(branching.times(genus.tree)))*(bind.depth2/tmp2[[2]])
+				genus.tree$edge.length <- (genus.tree$edge.length)*(bind.depth/tmp2[[2]])
+				} else {
+				bind.depth2 <- (phy.trim$edge.length[which(phy.trim$edge[,2]==bind.node)])*bind.depth2
+				genus.tree$edge.length <- (genus.tree$edge.length)*(bind.depth2/max(branching.times(genus.tree)))
+				}
+			phy.trim <- bind.tree(phy.trim, genus.tree, bind.node, bind.depth2)
+			phy.trim <- drop.tip(phy.trim, unlist(genus))
+			} else {
+			phy.trim$tip.label[which(phy.trim$tip.label==genus)] <- tmp.species
+		}
+	}
+	return(phy.trim)
+}
+
+##loading metada (md4) matrix with species to add in first column
+md4 <- read.csv(file.choose(), row.names = 1)
+
+##running function
+spp.tree <- add_species_fcn(tree, md4)
+
+##making phylogeny ultrametric
+spp.tree <- chronosMPL(spp.tree)
+
+###computing lineage diversity using species-level phylogeny
+##first, loading community (species-by-site) matrix
+comm2 <- read.table(file.choose(), header = T, row.names = 1, sep = ',')
+
+##matching community matrix and phylogeny (i.e., checking whether species in matrix are tips in phylogeny; and vice-versa)
+tmp <- match.phylo.comm(spp.tree, comm2)
+comm2 <- tmp$comm
+spp.tree <- tmp$phy
+
+LD.species <- ses.pd(comm2, spp.tree, null.model = 'taxa.label', runs = 999)
+
+###Rarefacted Lineage Diversity
+##keeping communities with at least 1/4 of highest genus richness
+tmp <- apply(comm, 1, sum)
+comm2 <- comm[which(tmp >= 86), ]
+
+##rarefaction
+comm2 <- lapply(1:100, function(x) rrarefy(comm2, 85))
+
+##excluding genera with no records after rarefaction
+tmp <- lapply(1:length(comm2), function(x) apply(comm2[[x]], 2, sum))
+
+comm2 <- lapply(1:length(comm2), function(x) comm2[[x]][, which(tmp[[x]] > 0)])
+#this creates a list with 100 communities rarefacted to 1/4 of highest genus richness
+
+##matching community matrices with phylogeny
+tmp <- lapply(1:length(comm2), function(x) match.phylo.comm(tree, comm2[[x]]))
+trees <- lapply(1:length(tmp), function(x) tmp[[x]]$phy)
+comm2 <- lapply(1:length(tmp), function(x) tmp[[x]]$phy)
+
+##computing and unlisting Lineage Diversity for 100 rarefacted communities
+LD.rarefacted <- lapply(1:length(trees), function(x) ses.pd(comm2[[x]], trees[[x]], null.model = 'taxa.label', runs = 999))
+LD.rarefacted <- do.call(cbind, LD.rarefacted)
+
+##calculating mean Lineage Diversity
+LD.mean <- as.matrix(apply(LD.rarefacted, 1, mean))
+colnames(LD.mean) <- 'LD_mean'
+
+##matching LD rarefacted and matrix with explanatory variables
+md5 <- md[which(rownames(md)%in%rownames(comm2[[1]])), ]
+md5 <- cbind(pd.mean, md5)
+
+##keeping only sites with high mean annual precipitation
+hi.MAP <- md4[which(md5$MAP>1490),]
+
+##Generalised Least Squares (controlling for spatial AC)
+f1 <- formula(hi.MAP$LD_mean ~ hi.MAP$MAP)
+hi.ac <- gls(f1, correlation = corExp(form = ~ 'Long10' + 'Lat10', nugget = TRUE), data = hi.MAP)
+
+###Supplementary Figure 7
+plot(hi.MAP$LD_mean ~ hi.MAP$MAP, col = "white", xlab = "Mean Annual Precipitation (mm)",
+	ylab = "Rarefacted Lineage Diversity (sesPD)", cex.lab = 1.5, cex.axis = 1.5)
+main = title('High MAP communities', cex.main = 1.5)
+
+##setting color ramp for points
+var <- hi.MAP$LD_mean
+nclas <- brewer.pal(4, "Spectral")
+nclas <- nclas[4:1]
+class <- classIntervals(var)
+colcode <- findColours(class, nclas)
+
+points(hi.MAP$MAP, hi.MAP$LD_mean, pch = 17, col = colcode)
+
+##extracting coefficients of correlation for legend
+hi.r = bquote(r^2 == .(format(cor(hi.MAP$LD_mean,predict(hi.ac))^2, digits = 1)))
+legend('topright', legend = hi.r, bty = "n", cex = 1.5)
+
+##extracting slope and intercept for curves
+x.hi <- c(1490,max(md5$MAP))
+y.hi <- x.hi*(lm(hi.MAP$LD ~ hi.MAP$MAP)$coefficients[2])+ lm(hi.MAP$LD ~ hi.MAP$MAP)$coefficients[1]
+
+##extracting ranges for 99% confidence intervals and plotting curves
+hi.ci <- lm(LD_mean ~ MAP, data = hi.MAP)
+hi.predict <- predict(hi.ci, interval="confidence", level = 0.99)
+ix <- sort(hi.MAP$MAP,index.return=T)$ix
+polygon(c(rev(hi.MAP$MAP[ix]), hi.MAP$MAP[ix]), c(rev(hi.predict[ix, 3]),
+	hi.predict[ix, 2]), border = NA, col = gray(0.2,alpha = 0.5))
+lines(x.hi, y.hi, lwd = 5, col = gray(0.2,alpha = 0.9))
 
