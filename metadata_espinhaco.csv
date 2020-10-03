@@ -1,0 +1,172 @@
+;SiteName;Long10;Lat10;Altitude;Domain;vegetation_type;TempAnn;TempDayRng;Isotherm;TempSeas;TempMax;TempMin;TempAnnRng;PrecAnn;PrecWetP;PrecDryP;PrecSeas;WaterDefDur;WaterDefSev;DaysFrost;CloudItcp;Rockiness;Sandiness;SoilDrain;SoilWaterStorage;SoilFert;Salinity
+AtlMG018;Itambé do Mato Dentro, floresta semidecídua;-432.072;-194.222;578;Atlantic Forest;semideciduous_forest;21.1;11.9;64;213;29.4;10.9;18.5;1491;335;10;89;120;89;0;0;5;65;35;50;17;0
+AtlMG033;Guaraciaba, floresta semidecídua;-430.203;-205.022;496;Atlantic Forest;semideciduous_forest;21.2;11.8;62;227;30;10.9;19.1;1179;225;11;84;140;86;0;0;5;55;35;53;17;0
+AtlMG040;Leme do Prado, floresta semidecídua;-427.033;-170.336;900;Atlantic Forest;semideciduous_forest;21.2;12.6;70;180;29.6;11.6;18;959;209;6;94;160;141;0;0;20;55;20;41;5;0
+AtlMG044;Aricanduva, floresta semidecídua;-425.294;-178.792;860;Atlantic Forest;semideciduous_forest;20.6;11.9;67;188;28.9;11.1;17.8;1137;236;12;87;135;97;0;0;5;55;35;53;17;0
+AtlMG046;Rio Vermelho, floresta semidecídua;-4.296.611.111;-1.824.222.222;719;Atlantic Forest;semideciduous_forest;21;12.1;65;206;29.4;10.9;18.5;1284;281;10;88;135;95;0;0;5;65;35;50;17;0
+AtlMG048;Guanhães, floresta semidecídua;-429.544;-186.939;916;Atlantic Forest;semideciduous_forest;19.6;12;65;214;28;9.4;18.6;1491;336;12;86;110;65;0;0;5;55;35;53;17;0
+AtlMG050;Carmésia, Aldeia Pataxó, floresta semidecídua;-431.225;-190.478;739;Atlantic Forest;semideciduous_forest;20;12;65;214;28.3;9.7;18.6;1599;368;11;88;110;69;0;0;5;55;35;53;17;0
+AtlMG054;São Gonçalo do Rio Abaixo, floresta semidecídua;-433.633;-199.019;775;Atlantic Forest;semideciduous_forest;20.5;11.6;64;212;28.6;10.4;18.2;1391;294;10;89;130;88;0;0;5;65;35;50;17;0
+AtlMG059;Diogo de Vasconcelos, floresta semidecídua;-431.758;-204.486;739;Atlantic Forest;semideciduous_forest;20.8;11.6;62;226;29.3;10.5;18.8;1218;229;10;85;140;85;0;0;5;55;35;53;17;0
+AtlMG060;Pinheiro Alto, floresta semidecídua;-432.856;-205.503;932;Atlantic Forest;semideciduous_forest;19.3;11.4;62;221;27.5;9.1;18.4;1329;245;13;83;120;65;1;0;5;65;35;50;17;0
+AtlMG061;Piranga, floresta semidecídua;-433.719;-206.286;777;Atlantic Forest;semideciduous_forest;20.2;11.5;62;222;28.5;10;18.5;1303;245;13;83;120;74;0;0;5;65;35;50;17;0
+AtlMG064;Serra do Caraça, Santuário, floresta nebular;-434.811;-200.925;1419;Atlantic Forest;montane_evergreen;16.7;11.3;66;190;24.5;7.3;17.2;1640;334;16;82;65;18;4;133;20;65;35;46;17;0
+AtlMG066;Ouro Preto, Itacolomi, floresta nebular;-435.006;-204.336;1402;Atlantic Forest;montane_evergreen;17;11.2;65;194;24.7;7.5;17.2;1638;332;17;82;60;13;4;144;20;65;35;46;17;0
+AtlMG069;Parque do Rio Preto, nanofloresta nebular;-433.342;-182.314;1541;Atlantic Forest;cloud_forest;17.1;10.4;62;177;25.6;8.9;16.7;1557;323;18;79;75;24;1;150;80;65;20;24;17;0
+AtlMG070;Serra do Caraça, Carapuça, nanofloresta nebular;-434.575;-200.792;1577;Atlantic Forest;cloud_forest;16.2;11.5;64;206;24.1;6.2;17.9;1510;303;17;80;75;16;7;149;80;65;20;24;17;0
+AtlMG071;Pico do Itacolomi, nanofloresta nebular;-434.725;-204.325;1626;Atlantic Forest;cloud_forest;15.6;11.1;65;199;23.3;6.1;17.2;1685;338;19;82;75;14;8;171;80;65;20;24;17;0
+AtlMG074;Grão Mogol, nanofloresta rupícola;-429.186;-165.469;1068;Atlantic Forest;montane_evergreen;19.8;12.4;70;175;28;10.4;17.6;995;221;5;96;150;126;0;66;80;85;20;19;5;0
+AtlMG075;Itacambira, nanofloresta rupícola;-433.639;-169.389;1125;Atlantic Forest;montane_evergreen;19.8;12;71;164;27.7;10.8;16.9;1106;239;5;94;145;121;0;78;80;85;20;19;5;0
+AtlMG076;Serra do Cabral, nanofloresta rupícola;-442.278;-177.608;1087;Atlantic Forest;montane_evergreen;20.1;12;68;175;28;10.3;17.7;1321;314;3;93;135;104;0;90;80;65;20;24;17;0
+AtlMG077;Serra do Ambrósio, nanofloresta rupícola;-431.033;-181.025;1209;Atlantic Forest;montane_evergreen;19.1;11.3;65;191;27.3;9.8;17.5;1345;293;10;89;125;78;0;102;80;85;20;19;5;0
+AtlMG078;Diamantina, nanofloresta rupícola;-435.969;-182.575;1116;Atlantic Forest;montane_evergreen;19.4;10.7;62;182;28.1;10.8;17.3;1437;333;8;91;120;82;0;100;80;85;20;19;5;0
+AtlMG079;Conselheiro Mata, nanofloresta rupícola;-439.961;-183.197;1020;Atlantic Forest;montane_evergreen;20.3;12.2;66;198;28.5;10;18.5;1295;292;5;93;135;107;0;83;80;85;20;19;5;0
+AtlMG080;Pico do Itambé, nanofloresta rupícola;-433.625;-184.319;1335;Atlantic Forest;montane_evergreen;18.6;10.9;63;185;27.2;9.8;17.4;1493;334;11;88;115;66;0;125;80;85;20;19;5;0
+AtlMG081;Gouveia a Datas, nanofloresta rupícola;-43.695;-184.375;1267;Atlantic Forest;montane_evergreen;18.7;10.8;62;181;27.4;10;17.4;1434;331;8;90;115;76;0;114;80;85;20;19;5;0
+AtlMG082;Conceição do Mato Dentro, nanofloresta rupícola;-436.864;-189.289;1295;Atlantic Forest;montane_evergreen;18.3;11.4;64;184;26.7;8.9;17.8;1537;314;10;86;115;67;1;124;80;85;20;19;5;0
+AtlMG083;Serra do Cipó, Lapinha, nanofloresta rupícola;-436.514;-191.606;1113;Atlantic Forest;montane_evergreen;19.1;11.6;65;186;27.4;9.5;17.9;1558;309;10;86;115;74;0;108;80;65;20;24;17;0
+AtlMG084;Serra do Cipó, Juquinha, nanofloresta rupícola;-435.467;-192.614;1291;Atlantic Forest;montane_evergreen;18.6;11.6;65;189;26.8;9;17.8;1579;314;10;85;115;68;1;127;80;65;20;24;17;0
+AtlMG085;Pico do Itabiruçu, nanofloresta rupícola;-433.078;-196.439;1133;Atlantic Forest;montane_evergreen;18.7;11.4;64;209;26.7;8.8;17.9;1568;349;10;88;110;65;1;111;80;85;20;19;5;0
+AtlMG086;Serra da Piedade, Santuário, nanofloresta rupícola;-436.778;-198.156;1381;Atlantic Forest;montane_evergreen;17.6;11.5;66;189;25.4;8;17.4;1575;334;11;88;110;55;3;136;80;85;20;19;5;0
+AtlMG087;Serra do Curral, Baleia, nanofloresta rupícola;-438.972;-199.358;1020;Atlantic Forest;montane_evergreen;19.6;12.2;66;195;27.6;9.2;18.4;1475;325;12;91;125;73;1;94;80;85;20;19;5;0
+AtlMG088;Gongo Soco, nanofloresta rupícola;-436.136;-199.511;1332;Atlantic Forest;montane_evergreen;17.6;11.5;66;195;25.4;7.9;17.5;1574;339;12;88;105;51;3;131;80;85;20;19;5;0
+AtlMG089;Serra do Rola-Moça, nanofloresta rupícola;-440.378;-200.664;1207;Atlantic Forest;montane_evergreen;18.6;12.4;67;193;26.7;8.1;18.6;1509;333;12;90;120;63;2;114;80;85;20;19;5;0
+AtlMG090;Serra da Pedra Grande, nanofloresta rupícola;-443.533;-201.231;1296;Atlantic Forest;montane_evergreen;18.8;12.9;68;202;26.8;7.8;19;1484;321;11;91;120;69;3;120;80;85;20;19;5;0
+AtlMG091;Capitão do Mato, nanofloresta rupícola;-439.133;-201.378;1152;Atlantic Forest;montane_evergreen;18.5;12.2;67;194;26.5;8.3;18.2;1513;339;12;90;115;61;2;109;80;85;20;19;5;0
+AtlMG092;Capanema, nanofloresta rupícola;-436.458;-20.17;1208;Atlantic Forest;montane_evergreen;17.7;11.5;66;193;25.5;8;17.5;1573;338;14;87;100;44;3;119;80;85;20;19;5;0
+AtlMG093;Mariana, nanofloresta rupícola;-434.567;-203.608;1260;Atlantic Forest;montane_evergreen;17.6;11.2;64;200;25.2;7.8;17.4;1599;332;16;84;95;34;3;126;80;85;20;19;5;0
+AtlMG094;Serra de Ouro Branco, nanofloresta rupícola;-436.503;-205.061;1305;Atlantic Forest;montane_evergreen;17.4;11.3;64;203;25.2;7.6;17.6;1581;328;16;85;95;35;3;129;80;85;20;19;5;0
+AtlMG095;Montividiu, floresta semidecídua;-430.514;-150.278;920;Atlantic Forest;semideciduous_forest;21.8;11.2;75;126;28.8;13.8;15;863;194;1;97;160;177;0;0;45;65;20;33;5;0
+AtlMG096;Rio Pardo de Minas, floresta semidecídua;-426.083;-156.231;785;Atlantic Forest;semideciduous_forest;21.2;12.2;71;164;29;11.9;17.1;917;208;2;96;160;150;0;0;45;65;20;33;5;0
+AtlMG097;Riacho dos Machados, floresta semidecídua;-430.708;-161.025;880;Atlantic Forest;semideciduous_forest;20.6;12.6;70;173;28.8;10.9;17.9;921;211;3;99;160;153;0;0;45;65;20;33;5;0
+AtlMG098;Grão Mogol, Rio Itacambiruçu, floresta semidecídua;-428.539;-165.867;641;Atlantic Forest;semideciduous_forest;21.6;12.9;70;181;30;11.7;18.3;957;213;6;95;160;147;0;0;45;65;20;33;5;0
+AtlMG099;Adão Colares, Rio Itacambiruçu, floresta semidecídua;-430.331;-166.939;750;Atlantic Forest;semideciduous_forest;21.1;12.7;71;179;29.4;11.4;18;984;216;5;95;155;143;0;0;45;65;20;33;5;0
+AtlMG100;Itacambira, Rio Itacambiruçu, floresta semidecídua;-432.711;-170.244;843;Atlantic Forest;semideciduous_forest;21.1;12.4;71;173;29.1;11.6;17.5;1027;228;5;96;160;146;0;0;45;65;20;33;5;0
+AtlMG101;Peixe Cru, floresta semidecídua;-429.486;-171.181;700;Atlantic Forest;semideciduous_forest;22.6;12.5;71;158;30.6;13;17.6;1019;240;0;104;165;186;0;0;80;55;20;26;5;0
+AtlMG102;Acauã, floresta semidecídua;-427.417;-171.428;937;Atlantic Forest;semideciduous_forest;21.1;12.5;70;178;29.4;11.6;17.8;977;213;6;94;160;139;0;0;80;55;20;26;17;0
+AtlMG103;Planalto de Minas, floresta semidecídua;-431.906;-175.069;908;Atlantic Forest;semideciduous_forest;21;11.9;68;181;29.1;11.6;17.5;1087;240;6;94;155;131;0;0;80;55;20;26;17;0
+AtlMG104;Abadia, floresta semidecídua;-431.067;-176.769;664;Atlantic Forest;semideciduous_forest;22;12.2;68;187;30.1;12.2;17.9;1061;234;5;95;160;143;0;0;20;45;20;44;17;0
+AtlMG105;São Gonçalo do Rio Preto, floresta semidecídua;-433.961;-179.997;786;Atlantic Forest;semideciduous_forest;20.9;11.7;66;189;29.3;11.5;17.8;1254;274;7;92;135;115;0;0;20;55;20;41;17;0
+AtlMG106;São João da Chapada, Macacos, floresta semidecídua;-437.256;-180.064;948;Atlantic Forest;semideciduous_forest;20.6;11.3;64;180;29.1;11.5;17.6;1343;304;6;92;130;107;0;0;45;65;20;33;5;0
+AtlMG107;Mendanha, Rio Jequitinhonha, floresta semidecídua;-434.494;-182.656;738;Atlantic Forest;semideciduous_forest;21.2;11.6;64;190;29.8;11.8;18;1366;302;9;90;130;104;0;0;45;65;20;33;5;0
+AtlMG108;Serra Azul de Minas, floresta semidecídua;-432.164;-183.575;771;Atlantic Forest;semideciduous_forest;20.6;11.9;65;201;29.1;10.7;18.4;1376;307;9;89;125;89;0;0;20;65;35;46;17;0
+AtlMG109;Milho Verde, Rio Jequitinhonha, floresta semidecídua;-435.317;-184.842;947;Atlantic Forest;semideciduous_forest;20;11.5;63;194;28.6;10.4;18.2;1429;326;8;91;125;87;0;0;45;65;20;33;5;0
+AtlMG110;Conceição do Mato Dentro, floresta semidecídua;-435.314;-189.831;715;Atlantic Forest;semideciduous_forest;21.1;12.7;65;209;29.7;10.1;19.6;1596;378;8;91;120;85;0;0;20;65;35;46;17;0
+AtlMG111;Cabeça de Boi, floresta semidecídua;-434.231;-194.061;847;Atlantic Forest;semideciduous_forest;20.2;11.8;66;196;28.4;10.5;17.9;1567;340;10;88;120;82;0;0;20;65;35;46;17;0
+AtlMG112;Itabira, floresta semidecídua;-433.194;-196.625;968;Atlantic Forest;semideciduous_forest;19.7;11.5;64;207;27.7;9.8;17.9;1508;336;10;88;120;75;0;0;20;65;35;46;17;0
+AtlMG113;Esmeraldas, floresta semidecídua;-441.642;-197.906;947;Atlantic Forest;semideciduous_forest;20.8;12.4;67;184;28.7;10.3;18.4;1377;297;9;92;135;98;0;0;5;65;35;50;17;0
+AtlMG114;Belo Horizonte, floresta semidecídua;-439.719;-198.769;847;Atlantic Forest;semideciduous_forest;20.7;12.2;67;191;28.6;10.3;18.3;1426;309;11;91;135;87;0;0;5;55;35;53;17;0
+AtlMG115;Sabará, Chácara do Lessa, floresta semidecídua;-438.089;-198.783;905;Atlantic Forest;semideciduous_forest;20.3;11.8;66;197;28.1;10.3;17.8;1432;313;10;92;130;85;0;0;20;65;35;46;17;0
+AtlMG116;Betim, floresta semidecídua;-442.419;-199.478;783;Atlantic Forest;semideciduous_forest;21.4;12.9;68;190;29.5;10.4;19.1;1358;287;10;91;135;98;0;0;5;55;35;53;17;0
+AtlMG117;Nova Lima, Mata do Jambreiro, floresta semidecídua;-438.842;-199.789;855;Atlantic Forest;semideciduous_forest;20.5;12.4;66;198;28.6;9.9;18.7;1463;325;12;92;130;81;0;0;20;65;35;46;37;0
+AtlMG118;Mateus Leme, floresta semidecídua;-443.328;-199.994;804;Atlantic Forest;semideciduous_forest;21.4;13;68;193;29.5;10.3;19.2;1373;296;9;91;135;101;0;0;5;65;35;50;37;0
+AtlMG119;São Gonçalo do Monte, floresta semidecídua;-435.294;-200.136;842;Atlantic Forest;semideciduous_forest;19.9;11.6;64;208;27.9;9.7;18.2;1430;308;11;89;125;79;0;0;5;65;35;50;17;0
+AtlMG120;Brumadinho, floresta semidecídua;-442.647;-201.778;862;Atlantic Forest;semideciduous_forest;21;13.1;68;201;29.3;9.9;19.4;1354;291;10;91;140;94;0;0;5;65;35;50;17;0
+AtlMG121;Mariana, floresta semidecídua;-433.861;-203.689;722;Atlantic Forest;semideciduous_forest;20;11.5;62;219;28.2;9.7;18.5;1339;264;11;86;125;81;0;0;5;65;35;50;17;0
+AtlMG122;Congonhas do Campo, floresta semidecídua;-438.675;-205.192;265;Atlantic Forest;semideciduous_forest;23;12.3;67;205;31.3;12.9;18.4;1410;299;14;88;140;96;0;0;20;65;35;46;17;0
+AtlMG124;Serro, floresta semidecídua;-433.878;-185.489;1120;Atlantic Forest;semideciduous_forest;19.1;11.8;64;204;27.6;9.1;18.5;1522;346;9;90;115;73;1;107;20;65;50;54;17;0
+AtlMG125;Congonhas do Norte, floresta semidecídua;-436.822;-187.819;1144;Atlantic Forest;semideciduous_forest;19;11.5;64;188;27.5;9.4;18.1;1488;323;8;88;115;77;0;106;20;65;35;46;17;0
+AtlMG126;Morro do Pilar, floresta semidecídua;-434.361;-192.064;1086;Atlantic Forest;semideciduous_forest;19.1;12;65;207;27.4;8.8;18.6;1666;380;9;89;115;69;1;113;20;65;50;54;17;0
+AtlMG127;Serra da Piedade, Penedia, floresta semidecídua;-436.486;-198.306;1211;Atlantic Forest;semideciduous_forest;18.8;11.6;67;189;26.6;9.2;17.4;1527;328;11;88;115;67;1;116;20;65;50;54;17;0
+AtlMG128;Serra do Curral, Mutuca, floresta semidecídua;-439.731;-200.139;1202;Atlantic Forest;semideciduous_forest;18.8;12.4;67;191;26.8;8.3;18.5;1504;333;11;91;120;66;2;113;20;65;50;54;17;0
+AtlMG129;Serra da Gandarela, floresta semidecídua;-436.686;-200.722;1228;Atlantic Forest;semideciduous_forest;18;11.6;67;183;25.9;8.6;17.3;1612;338;14;86;105;46;2;124;20;65;50;54;17;0
+AtlMG130;Serra da Calçada, floresta semidecídua;-439.967;-201.369;1077;Atlantic Forest;semideciduous_forest;20;12.9;67;202;28.2;8.9;19.3;1413;327;10;93;135;80;1;95;20;65;50;54;37;0
+AtlMG131;Serra de Itabirito, floresta semidecídua;-438.514;-202.467;1134;Atlantic Forest;semideciduous_forest;18.7;12;67;190;26.6;8.8;17.8;1551;340;13;88;105;56;1;110;20;65;50;54;37;0
+AtlMG132;Serra da Moeda, floresta semidecídua;-439.694;-202.703;1136;Atlantic Forest;semideciduous_forest;19.1;12.4;67;199;27.2;8.6;18.6;1452;330;12;91;120;69;1;103;20;65;50;54;17;0
+AtlMG133;Ouro Preto, Uaimií, floresta semidecídua;-435.481;-202.911;1300;Atlantic Forest;semideciduous_forest;17.3;11.3;64;199;25;7.4;17.6;1601;343;14;86;95;38;3;130;20;65;50;54;17;0
+AtlMG134;Cachoeira do Campo, floresta semidecídua;-436.694;-203.372;1164;Atlantic Forest;semideciduous_forest;18.7;11.6;65;201;26.5;8.6;17.9;1504;328;13;88;110;57;1;109;5;65;50;58;17;0
+AtlMG135;Ouro Branco, floresta semidecídua;-437.242;-204.972;1053;Atlantic Forest;semideciduous_forest;18.3;11.6;66;197;26.2;8.5;17.7;1522;321;15;86;105;49;2;100;20;65;50;54;17;0
+AtlMG136;Catas Altas da Noruega, floresta semidecídua;-435.394;-205.922;1279;Atlantic Forest;semideciduous_forest;17.5;11.2;63;211;25.4;7.7;17.7;1541;305;18;83;100;35;3;123;20;65;50;54;17;0
+AtlMG137;Montezuma, nanofloresta semidecídua;-424.511;-152.506;971;Atlantic Forest;semideciduous_forest;20.9;11.3;73;148;28;12.6;15.4;808;171;3;93;160;151;0;0;80;55;20;26;5;0
+AtlMG138;Indaiabira, nanofloresta semidecídua;-421.053;-153.889;868;Atlantic Forest;semideciduous_forest;21.1;11.5;71;163;28.6;12.3;16.3;753;160;4;90;155;148;0;0;80;55;20;26;5;0
+AtlMG139;Padre Carvalho, nanofloresta semidecídua;-425.122;-163.714;733;Atlantic Forest;semideciduous_forest;21.3;12.8;70;182;29.8;11.5;18.3;974;207;7;91;155;128;0;0;80;55;20;26;5;0
+AtlMG141;Serra Nova, campo rupícola;-427.456;-156.517;1017;Atlantic Forest;campo_rupestre;20.2;11.9;74;151;27.7;11.6;16.1;946;211;4;95;155;136;0;60;80;85;5;11;5;0
+AtlMG143;Grão Mogol, campo rupícola;-428.756;-163.706;1136;Atlantic Forest;campo_rupestre;19.4;12.5;70;183;27.6;9.7;17.9;968;224;4;99;155;131;0;69;80;85;5;11;5;0
+AtlMG144;Cristália, Morro do Chapéu, campo rupícola;-429.214;-167.208;1207;Atlantic Forest;campo_rupestre;19.3;12.4;69;184;27.5;9.6;17.9;1031;227;5;95;145;120;0;78;80;85;5;11;5;0
+AtlMG145;Botumirim, campo rupícola;-430.425;-169.267;1103;Atlantic Forest;campo_rupestre;19.9;12.3;70;181;28;10.4;17.6;1032;227;5;95;155;128;0;71;80;85;5;11;5;0
+AtlMG146;Serra do Cabral, campo rupícola;-442.564;-17.625;1126;Atlantic Forest;campo_rupestre;19.8;12;68;171;27.7;10.1;17.6;1325;305;4;91;130;99;0;93;80;85;5;11;5;0
+AtlMG147;Parque das Sempre-Vivas, campo rupícola;-438.103;-178.214;1193;Atlantic Forest;campo_rupestre;19.6;11.3;65;174;27.9;10.6;17.3;1337;305;6;92;130;95;0;100;80;85;5;11;5;0
+AtlMG148;Itamarandiba, Serra Negra, campo rupícola;-427.253;-180.111;1290;Atlantic Forest;campo_rupestre;18.7;11.3;65;189;26.7;9.4;17.3;1267;263;12;86;125;68;0;102;80;85;5;11;5;0
+AtlMG149;Diamantina, Biribiri, campo rupícola;-436.278;-18.14;1019;Atlantic Forest;campo_rupestre;20;11.1;63;183;28.6;11;17.6;1378;311;7;91;130;93;0;88;80;85;5;11;5;0
+AtlMG150;Parque do Rio Preto, campo rupícola;-433.522;-181.658;1224;Atlantic Forest;campo_rupestre;18.6;10.6;62;181;27.2;10.2;17;1450;324;11;89;115;68;0;111;80;85;5;11;5;0
+AtlMG151;Gouveia, campo rupícola;-437.753;-184.503;1043;Atlantic Forest;campo_rupestre;19.8;11.4;63;188;28.4;10.4;18;1363;314;6;91;130;93;0;89;80;85;5;11;5;0
+AtlMG152;Presidente Kubitschek, campo rupícola;-435.731;-186.353;1165;Atlantic Forest;campo_rupestre;18.8;11.2;63;187;27.4;9.6;17.8;1496;335;9;89;115;72;0;109;80;85;5;11;5;0
+AtlMG153;Santana de Pirapama, campo rupícola;-438.094;-188.539;1049;Atlantic Forest;campo_rupestre;19.7;11.8;65;186;28.1;9.9;18.2;1461;306;8;88;125;85;0;96;80;85;5;11;5;0
+AtlMG154;Serra do Cipó, Ermo dos Gerais, campo rupícola;-437.092;-190.475;1279;Atlantic Forest;campo_rupestre;18.5;11.9;64;194;26.8;8.3;18.5;1554;328;8;88;115;73;1;124;80;85;5;11;5;0
+AtlMG155;Serra do Cipó, Vellozias Gigantes, campo rupícola;-435.158;-19.24;1264;Atlantic Forest;campo_rupestre;18;11.4;64;187;26.2;8.5;17.7;1601;308;11;84;110;60;1;126;80;85;5;11;5;0
+AtlMG156;Serra de Sabarabuçu, campo rupícola;-437.469;-198.414;1144;Atlantic Forest;campo_rupestre;19.1;11.7;66;194;26.9;9.2;17.7;1500;330;10;91;120;74;1;107;80;85;5;11;5;0
+AtlMG157;Morro Vermelho, campo rupícola;-436.958;-199.472;1076;Atlantic Forest;campo_rupestre;19.5;11.7;66;198;27.3;9.5;17.8;1481;327;11;90;120;74;0;100;80;85;5;11;5;0
+AtlMG158;Serra do Curral, Mangabeiras, campo rupícola;-439.014;-199.492;1161;Atlantic Forest;campo_rupestre;19;12.1;66;197;27;8.6;18.4;1505;332;12;91;120;67;1;109;80;85;5;11;5;0
+AtlMG159;Itatiaiuçu, campo rupícola;-444.286;-201.431;1201;Atlantic Forest;campo_rupestre;19.1;12.9;68;196;27.2;8.3;18.9;1474;317;10;91;120;76;2;111;80;85;5;11;5;0
+AtlMG160;Ouro Preto, Alegria, campo rupícola;-435.119;-201.808;1036;Atlantic Forest;campo_rupestre;18.7;11.4;65;196;26.5;9;17.5;1564;329;14;85;100;51;1;101;80;85;5;11;5;0
+AtlMG161;Serra do Itabirito, Gata Branca, campo rupícola;-438.489;-202.214;1325;Atlantic Forest;campo_rupestre;17.9;11.9;67;192;25.8;8;17.8;1551;340;13;88;105;49;3;128;80;85;5;11;5;0
+AtlMG162;Serra de Ouro Branco, campo rupícola;-436.911;-204.861;1285;Atlantic Forest;campo_rupestre;17.6;11.4;66;192;25.3;8;17.3;1582;330;16;85;95;35;3;127;80;85;5;11;5;0
+AtlMG163;Lavras Novas, campo campo rupícola;-435.114;-204.864;1236;Atlantic Forest;campo_rupestre;17.7;11.2;64;199;25.4;8;17.4;1580;321;17;83;95;35;2;122;80;85;5;11;5;0
+AtlMG164;Retiro das Pedras, campo rupícola;-439.897;-200.803;1437;Atlantic Forest;campo_rupestre;17.9;12.1;67;187;25.8;7.8;18;1554;336;13;88;110;52;3;140;80;85;5;11;5;0
+AtlMG165;Serra da Gandarela, campo rupícola;-436.656;-201.106;1584;Atlantic Forest;campo_rupestre;16.2;11.5;66;191;24;6.7;17.3;1637;346;14;86;95;30;6;162;80;85;5;11;5;0
+AtlMG166;Serra do Caraça, Inficionado, campo rupícola;-434.547;-201.419;1914;Atlantic Forest;campo_rupestre;14.4;11.1;63;215;22.1;4.5;17.6;1651;339;16;85;85;16;53;198;80;85;5;11;5;0
+AtlMG167;Topo do Mundo, campo rupícola;-439.753;-201.803;1506;Atlantic Forest;campo_rupestre;17.1;12.1;66;195;25;6.8;18.2;1569;347;13;90;105;46;5;148;80;85;5;11;5;0
+CaaMG001;Montividiu, caatinga quartzítica;-43.02;-151.278;996;Caatinga;dry_forest;21.6;11.2;75;129;28.5;13.5;15;787;176;2;96;165;174;0;0;45;65;20;33;5;0
+CaaMG002;Santo Antônio do Retiro, caatinga quartzítica;-426.939;-151.414;1068;Caatinga;dry_forest;20.7;11.1;74;138;27.6;12.7;14.9;778;174;3;98;170;169;0;58;45;65;20;33;5;0
+CaaMG003;Espinosa, caatinga alcalina;-428.325;-149.481;644;Caatinga;dry_forest;24.4;11.2;75;123;31.2;16.2;15;757;166;1;95;170;205;0;0;20;55;35;49;87;20
+CaaMG004;Monte Azul, caatinga alcalina;-428.656;-151.214;698;Caatinga;dry_forest;23.6;10.8;76;121;30.3;16.1;14.2;828;182;1;97;165;200;0;0;20;55;35;49;87;20
+CaaMG025;Mato Verde, caatinga arbórea;-428.283;-153.972;741;Caatinga;dry_forest;22.7;11.5;75;138;29.8;14.4;15.4;989;223;2;98;160;178;0;0;20;65;20;39;67;0
+CaaMG028;Francisco Sá, caatinga arbórea;-434.703;-164.469;734;Caatinga;dry_forest;22;13;70;171;30.3;11.8;18.5;975;223;3;101;160;181;0;0;20;45;35;51;87;0
+CaaMG032;Usina de Irapé, floresta decídua;-426.108;-167.608;574;Caatinga;dry_forest;23;13.3;70;185;31.7;12.7;19;1011;216;3;96;165;163;0;0;45;55;5;28;37;0
+CaaMG033;Ninheira, floresta decídua;-416.964;-152.633;923;Caatinga;dry_forest;21.2;10.9;70;162;28.6;13;15.6;882;188;7;87;150;130;0;0;20;55;20;41;37;0
+CaaMG035;Taiobeiras, floresta decídua;-420.656;-158.703;854;Caatinga;dry_forest;21;12.1;70;174;28.9;11.6;17.3;883;191;4;92;155;135;0;0;20;55;20;41;37;0
+CerMG028;Francisco Sá, floresta ripícola;-434.706;-165.725;703;Cerrado;riverine_forest;21.9;12.9;71;168;30;11.9;18.1;1020;232;3;101;165;178;0;0;5;65;80;73;37;0
+CerMG029;Joaquim Felício, floresta ripícola;-441.433;-17.68;631;Cerrado;riverine_forest;22.5;12.8;69;189;30.3;11.8;18.5;1150;289;1;98;150;150;0;0;5;65;80;73;37;0
+CerMG030;Santana de Pirapama, Rio Cipó, floresta ripícola;-439.075;-18.865;613;Cerrado;riverine_forest;21.7;12.8;66;200;30.1;10.8;19.3;1281;269;7;90;135;114;0;0;20;45;80;74;37;0
+CerMG031;Santana do Riacho, Rio Cipó, floresta ripícola;-437.411;-191.133;691;Cerrado;riverine_forest;21.4;12.4;66;193;29.8;11;18.8;1470;321;8;89;130;100;0;0;20;85;80;64;37;0
+CerMG032;Cardeal Mota, Rio Mascate, floresta ripícola;-435.894;-193.828;807;Cerrado;riverine_forest;20.6;11.8;66;190;28.8;10.8;18;1529;325;9;88;125;89;0;0;20;65;80;69;17;0
+CerMG033;Olhos d’Água, floresta decídua;-437.536;-173.042;804;Cerrado;dry_forest;21.5;12.4;70;173;29.4;11.6;17.8;1120;248;4;95;150;143;0;0;20;45;20;44;87;0
+CerMG034;Cardeal Mota, floresta decídua;-436.169;-193.081;915;Cerrado;dry_forest;19.6;11.8;65;192;27.8;9.7;18.1;1536;327;9;88;125;81;0;0;20;55;20;41;87;0
+CerMG035;Fruta de Leite, cerradão mesotrófico;-426.433;-160.625;853;Cerrado;cerrado;20.9;12.6;70;181;29;11.1;17.9;969;213;5;95;160;139;0;0;20;55;35;49;37;0
+CerMG037;Senador Modestino Gonçalves, cerradão distrófico;-432.514;-179.397;724;Cerrado;cerrado;21.5;11.9;66;192;29.8;11.8;18;1187;259;7;92;140;125;0;0;20;55;20;49;17;0
+CerMG038;Rio Pardo de Minas, cerrado;-425.275;-155.792;832;Cerrado;cerrado;21.2;12.1;71;165;28.9;11.9;17;881;196;2;95;160;150;0;0;20;55;20;41;5;0
+CerMG039;Cristália, cerrado;-428.631;-167.306;771;Cerrado;cerrado;21.8;12.9;70;182;30.2;11.8;18.4;950;211;6;95;160;152;0;0;20;55;20;41;17;0
+CerMG041;Olhos d’Água, cerrado;-435.783;-173.072;785;Cerrado;cerrado;21.8;12.4;70;175;29.8;12;17.8;1066;238;4;96;160;149;0;0;20;55;20;41;17;0
+CerMG042;Turmalina, Veredinha, cerrado;-428.222;-17.4;886;Cerrado;cerrado;21.2;12.3;69;180;29.5;11.8;17.7;1001;218;6;94;160;138;0;0;20;55;20;41;17;0
+CerMG043;Carbonita, cerrado;-430.261;-17.555;797;Cerrado;cerrado;21.7;12.2;69;182;29.8;12.1;17.7;1030;228;5;95;160;145;0;0;20;55;20;41;17;0
+CerMG044;Abadia, cerrado;-43.15;-17.69;904;Cerrado;cerrado;21;12;68;185;29.1;11.4;17.7;1111;245;6;95;150;130;0;0;20;55;20;41;17;0
+CerMG045;Itamarandiba, cerrado;-427.697;-177.344;902;Cerrado;cerrado;20.8;11.8;68;182;28.8;11.4;17.4;1080;227;8;91;145;119;0;0;20;55;20;41;17;0
+CerMG046;São Gonçalo do Rio Preto, cerrado;-433.569;-180.622;749;Cerrado;cerrado;21;11.7;65;190;29.4;11.5;17.9;1266;276;8;91;135;111;0;0;20;55;20;41;17;0
+CerMG047;Montezuma, cerrado;-423.533;-151.014;1006;Cerrado;cerrado;20.8;11.2;73;148;27.9;12.5;15.4;822;172;4;92;155;147;0;52;20;55;20;41;5;0
+CerMG048;Francisco Sá, Catuni, cerrado rupícola;-432.511;-162.089;886;Cerrado;campo_rupestre_cerrado;21.1;12.7;70;173;29.3;11.1;18.2;981;213;4;94;155;143;0;0;45;65;5;25;5;0
+CerMG049;Grão Mogol, Santa Marta, cerrado rupícola;-433.056;-166.267;884;Cerrado;campo_rupestre_cerrado;20.7;12.5;71;171;28.6;11.1;17.5;1022;225;3;98;155;150;0;0;45;55;5;28;17;0
+CerMG050;Botumirim, cerrado rupícola;-430.044;-168.547;877;Cerrado;campo_rupestre_cerrado;20.9;12.4;70;174;29.1;11.5;17.6;1011;221;5;95;155;140;0;0;45;55;5;28;17;0
+CerMG051;Itacambira, cerrado rupícola;-432.647;-169.189;919;Cerrado;campo_rupestre_cerrado;21;12.5;71;172;29;11.5;17.5;1022;226;4;96;160;147;0;0;45;55;5;28;17;0
+CerMG052;São João da Chapada, Macacos, cerrado rupícola;-437.489;-179.842;980;Cerrado;campo_rupestre_cerrado;20.5;11.2;64;178;29;11.6;17.4;1369;312;7;91;130;100;0;0;45;55;5;28;17;0
+CerMG053;Mendanha, cerrado rupícola;-435.364;-180.919;711;Cerrado;campo_rupestre_cerrado;21.4;11.9;65;196;29.8;11.6;18.2;1264;269;7;92;135;119;0;0;45;55;5;28;17;0
+CerMG054;Santana de Pirapama, cerrado rupícola;-438.539;-188.733;717;Cerrado;campo_rupestre_cerrado;21.4;12.3;65;193;29.8;11;18.8;1377;294;7;89;135;106;0;0;45;65;5;25;5;0
+CerMG055;Santana do Riacho, cerrado rupícola;-437.089;-19.14;866;Cerrado;campo_rupestre_cerrado;21;12.4;66;195;29.3;10.4;18.9;1452;326;7;90;130;98;0;0;45;65;5;25;5;0
+CerMG056;Cardeal Mota, cerrado rupícola;-436.136;-193.544;821;Cerrado;campo_rupestre_cerrado;20.4;12;66;195;28.6;10.3;18.3;1508;338;8;90;125;90;0;0;45;65;5;25;5;0
+CerMG057;Serra do Cabral, cerrado rupícola;-442.006;-179.119;736;Cerrado;campo_rupestre_cerrado;22.5;12.8;68;195;30.4;11.7;18.7;1179;308;1;99;150;145;0;0;45;65;5;25;17;0
+CerMG058;Gouveia, cerrado rupícola;-438.072;-185.731;1037;Cerrado;campo_rupestre_cerrado;19.8;11.6;64;188;28.3;10.2;18.1;1382;313;6;91;125;93;0;90;45;55;5;28;17;0
+CerMG069;Lassance, floresta ripícola;-445.683;-179.339;516;Cerrado;riverine_forest;23.3;13.3;69;199;31.2;11.8;19.4;1152;289;0;99;155;153;0;0;20;65;65;61;17;0
+CerMG079;Buriti do Campo Santo, floresta ripícola;-440.097;-166.894;835;Cerrado;riverine_forest;21.4;13;71;159;29.4;11.1;18.3;1149;271;2;99;150;157;0;0;5;65;80;73;37;0
+CerMG080;Juramento, floresta ripícola;-436.983;-167.772;609;Cerrado;riverine_forest;22.6;12.9;72;163;30.4;12.5;17.9;1044;248;3;102;165;179;0;0;5;65;80;73;37;0
+CerMG084;Corinto, floresta ripícola;-443.533;-184.681;635;Cerrado;riverine_forest;22.2;13.1;68;206;30.4;11.1;19.3;1161;272;4;95;150;134;0;0;5;65;80;73;37;0
+CerMG091;Lagoa Santa, Rio das Velhas, floresta ripícola;-438.136;-196.419;675;Cerrado;riverine_forest;21.4;11.8;67;183;29.2;11.6;17.6;1370;308;8;92;140;110;0;0;5;85;80;68;37;0
+CerMG092;Santa Luzia, floresta ripícola;-438.664;-197.244;679;Cerrado;riverine_forest;21.6;11.7;67;182;29.3;11.8;17.5;1359;301;8;92;140;110;0;0;5;85;80;68;37;0
+CerMG107;Várzea da Palma, floresta decídua;-447.072;-175.922;498;Cerrado;dry_forest;23.5;13.5;68;198;31.8;11.8;20;1109;244;1;95;160;159;0;0;20;15;35;59;87;0
+CerMG109;Santo Hipólito, floresta decídua;-441.906;-182.914;597;Cerrado;dry_forest;22.6;13;68;203;30.7;11.6;19.1;1110;282;3;98;155;146;0;0;20;55;35;49;87;0
+CerMG112;Montes Claros, floresta decídua;-439.072;-167.431;838;Cerrado;dry_forest;21.8;12.9;71;162;29.6;11.5;18.1;1090;257;2;101;155;165;0;0;20;55;20;41;87;0
+CerMG113;Juramento, floresta decídua;-436.636;-16.775;662;Cerrado;dry_forest;22.5;12.9;73;163;30.2;12.5;17.7;1035;246;3;102;160;179;0;0;20;55;20;41;87;0
+CerMG114;Bocaiúva, floresta decídua;-437.672;-170.736;759;Cerrado;dry_forest;22.2;12.8;72;169;29.9;12;17.9;1081;239;4;96;160;155;0;0;20;45;20;44;87;0
+CerMG118;Baldim, floresta decídua;-438.408;-192.733;914;Cerrado;dry_forest;20.8;12.2;66;185;28.9;10.5;18.4;1391;305;7;90;135;104;0;0;20;55;20;41;87;0
+CerMG119;Lagoa Santa, Lapinha, floresta decídua;-439.597;-19.56;744;Cerrado;dry_forest;21.7;12;67;176;29.5;11.5;18;1321;302;6;94;140;121;0;0;20;55;20;41;87;0
+CerMG133;Coração de Jesus, cerradão mesotrófico;-441.617;-165.258;847;Cerrado;cerrado;21.5;13.4;71;158;29.9;11;18.9;1129;261;3;97;145;156;0;0;20;15;35;59;37;0
+CerMG134;Montes Claros, cerradão mesotrófico;-437.453;-166.819;626;Cerrado;cerrado;22.7;12.9;72;159;30.5;12.5;18;1030;243;2;102;165;183;0;0;20;85;35;41;37;0
+CerMG135;Juramento, cerradão mesotrófico;-435.656;-169.097;746;Cerrado;cerrado;21.8;12.7;72;167;29.6;12;17.6;1031;238;3;99;160;163;0;0;5;65;35;50;37;0
+CerMG139;Confins, cerradão mesotrófico;-439.464;-196.403;795;Cerrado;cerrado;21.5;11.8;67;178;29.2;11.6;17.6;1338;303;7;93;140;116;0;0;20;15;35;59;37;0
+CerMG143;Sete Lagoas, cerradão distrófico;-441.472;-194.997;814;Cerrado;cerrado;21.7;12.4;67;173;29.5;11.1;18.4;1330;304;5;94;140;121;0;0;20;55;20;49;17;0
+CerMG144;Pedro Leopoldo, cerradão distrófico;-440.714;-196.075;803;Cerrado;cerrado;21.5;12.1;67;174;29.3;11.3;18;1320;298;7;94;145;118;0;0;20;55;20;49;17;0
+CerMG145;Belo Horizonte, Granja Wernek, cerradão distrófico;-439.156;-198.075;787;Cerrado;cerrado;21.4;11.7;67;182;29.1;11.7;17.4;1375;300;9;92;140;104;0;0;20;55;20;49;17;0
+CerMG147;Jequitaí, cerrado;-445.183;-173.072;554;Cerrado;cerrado;23.2;13.6;68;190;31.5;11.5;20;1013;220;3;93;155;167;0;0;20;55;20;41;17;0
+CerMG151;Várzea da Palma, cerrado;-446.811;-175.433;510;Cerrado;cerrado;23.6;13.5;67;199;31.9;11.8;20.1;1073;234;1;95;160;165;0;0;20;55;20;41;17;0
+CerMG167;Claro dos Poções, cerrado;-442.856;-169.647;850;Cerrado;cerrado;21.5;13.3;70;170;29.8;10.8;19;1286;269;6;89;135;131;0;0;5;65;20;50;17;0
+CerMG168;Bocaiúva, cerrado;-439.072;-171.078;670;Cerrado;cerrado;22.5;12.9;71;170;30.2;12;18.2;1068;232;4;95;155;160;0;0;5;65;20;50;17;0
+CerMG172;Corinto, cerrado;-444.686;-183.533;662;Cerrado;cerrado;22.3;13.1;69;201;30.3;11.2;19.1;1173;288;3;96;150;136;0;0;5;55;20;53;17;0
+CerMG180;São José do Almeida, cerrado;-438.264;-194.081;764;Cerrado;cerrado;21.2;12.1;66;183;29.2;11;18.2;1387;313;7;92;135;109;0;0;20;55;20;41;17;0
